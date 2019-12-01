@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.squareup.wire:wire-gradle-plugin:3.0.2'
+    }
+}
+
+apply plugin: 'org.jetbrains.kotlin.jvm'
+apply plugin: 'com.squareup.wire'
+
+group 'com.pvasilev'
+version '1.0'
+
+wire {
+    kotlin {
+        rpcRole = 'client'
+        out = "$projectDir/src/main/kotlin"
+    }
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2'
+    implementation 'com.squareup.wire:wire-runtime:3.0.2'
+    implementation 'com.squareup.wire:wire-grpc-client:3.0.2'
+}

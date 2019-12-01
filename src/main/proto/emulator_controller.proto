@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+option java_package = "android.emulation.control";
+
+package android.emulation.control;
+
+service EmulatorController {
+    rpc getScreenshot(ImageFormat) returns (Image) {}
+}
+
+message Rotation {
+    enum SkinRotation {
+        SKIN_ROTATION_0 = 0;
+        SKIN_ROTATION_90 = 1;
+        SKIN_ROTATION_180 = 2;
+        SKIN_ROTATION_270 = 3;
+    }
+    optional SkinRotation rotation = 1;
+}
+
+message ImageFormat {
+    enum ImgFormat {
+        PNG = 0;
+        RAW = 1;
+        RGB888 = 2;
+        RGBA8888 = 3;
+    }
+    optional ImgFormat format = 1;
+    optional Rotation rotation = 2;
+}
+message Image {
+    optional ImageFormat format = 1;
+    optional uint32 width = 2;
+    optional uint32 height = 3;
+    optional bytes image = 4;
+}
